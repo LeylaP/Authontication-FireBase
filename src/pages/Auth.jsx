@@ -3,15 +3,33 @@ import { FaGoogle } from "react-icons/fa";
 import {
   createUserWithEmailAndPassword,
   signInWithEmailAndPassword,
+  GoogleAuthProvider,
+  signInWithPopup,
 } from "firebase/auth";
 import { toast } from "react-toastify";
 import { auth } from "../Firebase";
 import { useNavigate } from "react-router-dom";
 
+const provider = new GoogleAuthProvider();
+
 export default function Auth() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const navigate = useNavigate();
+
+  const loginWithGoogle = async () => {
+    try {
+      const response = await signInWithPopup(auth, provider);
+      // const credential = GoogleAuthProvider.credentialFromResult(response);
+      // const token = credential.accessToken;
+      const user = response.user;
+      if (user) {
+        navigate("/");
+      }
+    } catch (error) {
+      toast.error(error.message);
+    }
+  };
 
   const login = async () => {
     try {
@@ -67,7 +85,7 @@ export default function Auth() {
         />
       </div>
       <div className="button-div">
-        <button className="google-button">
+        <button onClick={loginWithGoogle} className="google-button">
           <FaGoogle /> Google ile Giriş
         </button>
         <button onClick={login} className="login-button">
