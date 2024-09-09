@@ -13,3 +13,5 @@
 <p><b>Vite:<b> Build tool and development server</p>
 <p><b>React<b> Router DOM: Client-side routing</p>
 <p><b>React<b> Toastify: Toast notifications</p>
+
+![FirebaseAuthentication Page Gif](https://github.com/LeylaP/Authontication-FireBase/blob/main/src/assets/FirebaseAuthontication.gif)
